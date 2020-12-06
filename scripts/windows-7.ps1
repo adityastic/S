@@ -24,4 +24,4 @@ Write-Host 'Setting Tasks'
 schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd.exe /C cd 'C:\Program Files\nodejs' && $env:APPDATA\npm\hw-info-cli.cmd" /ru System /rl Highest
 
 
-rm -r "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js"
+if (Test-Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js") { rm -r "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js" }
