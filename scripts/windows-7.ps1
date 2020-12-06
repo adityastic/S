@@ -12,7 +12,8 @@ Write-Host 'Installing Node'
 (Start-Process "msiexec.exe" -ArgumentList "/i `"$env:temp\node.msi`" /qn" -NoNewWindow -Wait -PassThru).ExitCode
 
 Write-Host 'Downloading cli'
-Start-Process powershell -ArgumentList "-command &{ npm i hw-info-cli -g }" -Wait
+Start-Process powershell -ArgumentList "-noexit","-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force;npm i hw-info-cli -g }" -Wait
+Start-Process powershell -ArgumentList "-noexit","-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force;hw-info-cli -s }" -Wait
 
 Write-Host 'Setting Tasks'
 schtasks /create /sc HOURLY /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
