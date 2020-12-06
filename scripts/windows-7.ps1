@@ -18,7 +18,7 @@ Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -
 $env:Path += ";$env:APPDATA\npm\"
 Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force; hw-info-cli.cmd -s}" -Wait
 
-cp $env:USERPROFILE\.hwinfocli C:\Windows\System32\config\systemprofile\.hwinfocli
+cp $env:USERPROFILE\.hwinfocli C:\Windows\System32\config\systemprofile -r
 
 Write-Host 'Setting Tasks'
-schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd /C $env:APPDATA\npm\hw-info-cli" /ru System /rl Highest
+schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd.exe /C $env:APPDATA\npm\hw-info-cli" /ru System /rl Highest
