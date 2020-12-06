@@ -22,3 +22,7 @@ cp $env:USERPROFILE\.hwinfocli C:\Windows\System32\config\systemprofile -r
 
 Write-Host 'Setting Tasks'
 schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd.exe /C cd 'C:\Program Files\nodejs' && $env:APPDATA\npm\hw-info-cli.cmd" /ru System /rl Highest
+
+
+rm -r "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js"
+rm "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{F69E1720-E776-4845-A324-462E7FFFC082}"
