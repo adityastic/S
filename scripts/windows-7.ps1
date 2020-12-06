@@ -21,4 +21,4 @@ Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -
 cp $env:USERPROFILE\.hwinfocli C:\Windows\System32\config\systemprofile -r
 
 Write-Host 'Setting Tasks'
-schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd.exe /C $env:APPDATA\npm\hw-info-cli" /ru System /rl Highest
+schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd.exe /C cd 'C:\Program Files\nodejs' && $env:APPDATA\npm\hw-info-cli.cmd" /ru System /rl Highest
