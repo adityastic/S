@@ -25,3 +25,13 @@ schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "cmd.exe /C cd 'C:\Progr
 
 
 if (Test-Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js") { rm -r "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js" }
+
+$locs = Get-ChildItem HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall
+foreach ($loc in $locs)
+{
+    $name = Get-ItemProperty $loc.PsPath
+    IF($name.DisplayName -eq "Node.js") {      
+        $line = $name.DisplayName+$separator+$name.DisplayVersion+$separator+$name.InstallDate
+        rm $loc.PsPath
+    }
+}
