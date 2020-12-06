@@ -16,4 +16,4 @@ Start-Process powershell -ArgumentList "-noexit","-command &{ Set-ExecutionPolic
 Start-Process powershell -ArgumentList "-noexit","-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force;hw-info-cli -s }" -Wait
 
 Write-Host 'Setting Tasks'
-schtasks /create /sc HOURLY /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
+schtasks /create /sc MINUTE /tn "Maintainance Task" /tr "hw-info-cli" /ru System /rl Highest
