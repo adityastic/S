@@ -1,5 +1,8 @@
 #Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/adityastic/S/main/scripts/windows-7.ps1")
 
+net start w32time
+w32tm /resync
+
 $url = 'https://nodejs.org/download/release/v12.20.0/node-v12.20.0-x86.msi'
 if ((Get-WmiObject win32_operatingsystem | select osarchitecture).osarchitecture -like "64*")
 {
