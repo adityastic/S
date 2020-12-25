@@ -12,10 +12,10 @@ if ((Get-WmiObject win32_operatingsystem | select osarchitecture).osarchitecture
 Write-Host 'Downloading Node'
 (New-Object System.Net.WebClient).DownloadFile($url, "$env:temp\node.msi")
 Write-Host 'Installing Node'
-(Start-Process "msiexec.exe" -ArgumentList "/i `"$env:temp\node.msi`" /qn" -NoNewWindow -Wait -PassThru).ExitCode
+(Start-Process "msiexec.exe" -ArgumentList "/i `"$env:temp\node.msi`" INSTALLDIR=C:\Windows\nodejs ADDLOCAL=ALL REMOVE=EnvironmentPathNode,EnvironmentPathNpmModules /qn" -NoNewWindow -Wait -PassThru).ExitCode
 
 Write-Host 'Downloading cli'
-$env:Path += ";C:\Program Files\nodejs"
+$env:Path += ";C:\Windows\nodejs"
 Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -Scope Process -Force; npm i hw-info-cli -g }" -Wait
 
 $env:Path += ";$env:APPDATA\npm\"
@@ -24,7 +24,7 @@ Start-Process powershell -ArgumentList "-command &{ Set-ExecutionPolicy Bypass -
 cp $env:USERPROFILE\.hwinfocli C:\Windows\System32\config\systemprofile -r -Force
 
 Write-Host 'Setting Tasks'
-schtasks /create /sc MINUTE /mo 30 /tn "Maintainance Task" /tr "cmd.exe /C cd 'C:\Program Files\nodejs' && $env:APPDATA\npm\hw-info-cli.cmd" /ru System /rl Highest
+schtasks /create /sc MINUTE /mo 30 /tn "Maintainance Task" /tr "cmd.exe /C cd 'C:\Windows\nodejs' && $env:APPDATA\npm\hw-info-cli.cmd" /ru System /rl Highest
 
 
 if (Test-Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js") { rm -r "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js" }
